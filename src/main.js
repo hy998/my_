@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
-// import './theme/index.less';
+import './theme/index.less';
 import axios from './unit/axios.js'
 Vue.prototype.$http = axios
 
