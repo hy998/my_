@@ -5,15 +5,14 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    userInfo: {
-        name: 'heyu',
-        age: 29
-    }
+    userInfo: null
   },
   mutations: {
-    increment (state, num) {
-      state.userInfo.age = num
+    setUserInfo (state, userInfo) {
+      state.userInfo = userInfo
     }
+  },
+  actions: {
   }
 })
 

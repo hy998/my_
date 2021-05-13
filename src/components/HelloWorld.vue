@@ -12,7 +12,7 @@
       ></Table>
     </div>
     <Button type="primary" @click="open">全局确认弹窗</Button>
-    <p>我是全局变量：{{$store.state.userInfo.name}}</p>
+    <p>我是全局变量：{{`${$store.state.userInfo.name}--${$store.state.userInfo.phone}`}}</p>
     <div id="qrcode">
       <vue-qr :logoSrc="imageUrl" text="你好，我是二维码" :size="200"></vue-qr>
     </div>
@@ -169,10 +169,10 @@ export default {
     }
   },
   created() {
-    // console.log(this.$store.state)
-    this.$http.get("/user/userinfo.json", {
-      params: {},
-    });
+    console.log(this.$store.state.userInfo)
+    // this.$http.get("/user/userinfo.json", {
+    //   params: {},
+    // });
   },
 };
 </script>
