@@ -3,14 +3,30 @@
     <Button type="primary" shape="circle" icon="ios-search"></Button>
     <Button type="primary" loading>Loading...</Button>
     <div class="tables">
-      <Table row-key="ids" :columns="columns1" :data="data1" border :height="280"></Table>
+      <Table
+        row-key="ids"
+        :columns="columns1"
+        :data="data1"
+        border
+        :height="280"
+      ></Table>
+    </div>
+    <Button type="primary" @click="open">全局确认弹窗</Button>
+    <p>我是全局变量：{{$store.state.userInfo.name}}</p>
+    <div id="qrcode">
+      <vue-qr :logoSrc="imageUrl" text="你好，我是二维码" :size="200"></vue-qr>
     </div>
   </div>
 </template>
 
 <script>
+// import QRCode from "qrcodejs2";
+import vueQr from 'vue-qr'
 export default {
   name: "HelloWorld",
+  components: {
+      vueQr
+    },
   data() {
     return {
       msg: "Welcome to Your Vue.js App",
@@ -23,50 +39,54 @@ export default {
         {
           title: "Age",
           key: "age",
-          sortable: true
+          sortable: true,
         },
         {
           title: "Address",
           key: "address",
           render: (h, params) => {
-            return h('Tooltip', {
-              props: {
-                placement: 'top',
-                content: params.row.address
-              }
-            }, params.row.address)
-          }
+            return h(
+              "Tooltip",
+              {
+                props: {
+                  placement: "top",
+                  content: params.row.address,
+                },
+              },
+              params.row.address
+            );
+          },
         },
         {
-          title: '操作',
+          title: "操作",
           render: (h, params) => {
-            return h('div', [
-              h('Icon', {
-              props: {
-                type: 'md-add'
-              },
-              style: {
-                cursor: 'pointer',
-                margin: '0 10px'
-              },
-              attrs: {
-                title: '添加'
-              }
-            }),
-            h('Icon', {
-              props: {
-                type: 'md-trash'
-              },
-              style: {
-                cursor: 'pointer'
-              },
-              attrs: {
-                title: '删除'
-              }
-            })
-            ])
-          }
-        }
+            return h("div", [
+              h("Icon", {
+                props: {
+                  type: "md-add",
+                },
+                style: {
+                  cursor: "pointer",
+                  margin: "0 10px",
+                },
+                attrs: {
+                  title: "添加",
+                },
+              }),
+              h("Icon", {
+                props: {
+                  type: "md-trash",
+                },
+                style: {
+                  cursor: "pointer",
+                },
+                attrs: {
+                  title: "删除",
+                },
+              }),
+            ]);
+          },
+        },
       ],
       data1: [
         {
@@ -138,9 +158,18 @@ export default {
           date: "2016-10-04",
         },
       ],
+      imageUrl: require('../assets/logo.png')
     };
   },
+  methods: {
+    open() {
+      this.$popup({
+        com_ok_msg: "我是一个全局组件",
+      });
+    }
+  },
   created() {
+    // console.log(this.$store.state)
     this.$http.get("/user/userinfo.json", {
       params: {},
     });
@@ -153,7 +182,7 @@ export default {
 #home {
   .tables {
     width: 800px;
-    margin: 20px auto;
+    margin: 10px;
   }
 }
 </style>

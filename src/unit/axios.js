@@ -21,4 +21,6 @@ axios.interceptors.response.use(res => {
   return res
 })
 
+axios.defaults.baseURL = 'https://api.honpc.com/yrcpt/'
+axios.defaults.withCredentials = true
 export default axios
