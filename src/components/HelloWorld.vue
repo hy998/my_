@@ -16,6 +16,10 @@
     <div id="qrcode">
       <vue-qr :logoSrc="imageUrl" text="你好，我是二维码" :size="200"></vue-qr>
     </div>
+      <p>我是多语言的变量: {{$t('m.music')}}</p>
+      <p>我是多语言的变量: {{$t('m2.music')}}</p>
+      <p>当前的语言是：{{this.$i18n.locale }}</p>
+      <Button type="primary" @click="change">切换语言</Button>
   </div>
 </template>
 
@@ -32,17 +36,17 @@ export default {
       msg: "Welcome to Your Vue.js App",
       columns1: [
         {
-          title: "Name",
+          title: "姓名",
           key: "name",
           tree: true,
         },
         {
-          title: "Age",
+          title: "年纪",
           key: "age",
           sortable: true,
         },
         {
-          title: "Address",
+          title: "地址",
           key: "address",
           render: (h, params) => {
             return h(
@@ -166,6 +170,9 @@ export default {
       this.$popup({
         com_ok_msg: "我是一个全局组件",
       });
+    },
+    change() {
+      this.$i18n.locale = this.$i18n.locale === 'zh' ? 'en' : 'zh'
     }
   },
   created() {

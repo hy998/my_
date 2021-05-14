@@ -5,9 +5,16 @@ import App from './App'
 import router from './router'
 import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
+// 改变组件主题颜色
 import './theme/index.less';
+
+// axios 请求配置
 import axios from './unit/axios.js'
 import store from './vuex/index'
+
+// 多语言配置
+import i18n from './lang/index'
+
 Vue.prototype.$http = axios
 
 // 确认弹窗组件
@@ -22,6 +29,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  i18n,
   store,
   components: { App },
   template: '<App/>'
